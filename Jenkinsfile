@@ -1,39 +1,56 @@
 pipeline {
     agent any
-    
     stages {
-        stage('Lint') {
+        stage("Verify tooling") {
             steps {
-                sh 'npm run lint'
+                sh '''
+                    docker info
+                    docker version
+                    docker compose version
+                '''
             }
         }
-        
-        stage('Build and Test') {
-            parallel {
-                stage('Build') {
-                    steps {
-                        sh 'composer install'
-                    }
-                }
                 
-                stage('Test') {
-                    steps {
-                        sh 'php artisan test'
+        stage("Clear all running docker containers") {
+            steps {
+                script {
+                    try {
+                        sh 'docker rm -f $(docker ps -a -q)'
+                    } catch (Exception e) {
+                        echo 'No running container to clear up...'
                     }
                 }
             }
         }
-        
-        stage('Deploy') {
+        stage("Start Docker") {
             steps {
-                sh 'composer install'
+                sh 'make up'
+                sh 'docker compose ps'
             }
         }
-        
-        stage('Dockerize') {
+        stage("Run Composer Install") {
             steps {
-                sh 'docker build -t app .'
+                sh 'docker compose run --rm composer install'
             }
+        }
+        stage("Populate .env file") {
+            steps {
+                dir("/var/lib/jenkins/workspace/envs/laravel-test") {
+                    fileOperations([fileCopyOperation(excludes: '', flattenFiles: true, includes: '.env', targetLocation: "${WORKSPACE}")])
+                }
+            }
+        }              
+        stage("Run Tests") {
+            steps {
+                sh 'docker compose run --rm artisan test'
+            }
+        }
+    }
+    post {
+
+        always {
+            sh 'docker compose down --remove-orphans -v'
+            sh 'docker compose ps'
         }
     }
 }
