@@ -1,16 +1,16 @@
 pipeline {
-  agent any
-  
-  stages {
-    stage('Test') {
-      parallel {
-        stage('Test Pipeline step 1') {
-          steps {
-            sh 'echo "Linting..."'
-          }
-      }
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Linting') {
+            steps {
+                sh 'npm install --silent'
+                sh 'npm run lint'
+            }
+        }
     }
-    
-}
-  }
 }
