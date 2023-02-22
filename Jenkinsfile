@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Build') {
            steps {
-                sh 'docker build -t 12factor/app .'
+                sh 'docker build app .'
            }
         }
         stage('Deploy') {
