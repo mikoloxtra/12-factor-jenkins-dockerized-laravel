@@ -22,6 +22,7 @@ pipeline {
         }
         stage('Build') {
            steps {
+                sh 'docker compose down'
                 sh 'docker build -t 12factor/app .'
            }
         }
