@@ -6,6 +6,7 @@ services:
       context: .
     volumes:
       - .:/var/www/12factor
+    user: "1000:1000"
     environment:
       DB_HOST: db
       DB_PORT: 3306
