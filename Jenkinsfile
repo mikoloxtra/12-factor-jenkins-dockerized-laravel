@@ -25,5 +25,12 @@ pipeline {
                 sh 'docker build -t 12factor/app .'
            }
         }
+        stage('Deploy') {
+            steps {
+                sh 'docker push 12factor/app'
+                sh 'docker-compose pull'
+                sh 'docker-compose up -d'
+            }
+        }
     }
 }
