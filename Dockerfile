@@ -27,7 +27,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Install app dependencies
 RUN composer install --no-dev
-#RUN chown -R 1000:www-data /var/www/12factor && chown -R 775 /var/www/12factor/storage/*
 
 # Setup Nginx
 RUN rm /etc/nginx/sites-enabled/default
@@ -35,7 +34,7 @@ COPY /nginx/app.conf /etc/nginx/conf.d/
 
 COPY .env /var/www/12factor/
 
-RUN chown -R www-data:www-data /var/www/
+RUN chown -R www-data:www-data /var/www/12factor && chmod -R 775 /var/www/12factor/storage
 
 # Expose ports
 EXPOSE 80
