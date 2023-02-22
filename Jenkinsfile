@@ -22,7 +22,6 @@ pipeline {
         }
         stage('Build') {
            steps {
-                sh 'cp /.env .'
                 sh 'docker build -t 12factor/app .'
            }
         }
