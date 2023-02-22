@@ -32,8 +32,8 @@ services:
       - dbdata:/var/lib/mysql
     networks:
       - laravel-network
-    env_file:
-      - .env
+   # env_file:
+   #   - .env
 
 networks:
   laravel-network:
