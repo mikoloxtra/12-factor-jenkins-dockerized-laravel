@@ -35,10 +35,10 @@ COPY /nginx/app.conf /etc/nginx/conf.d/
 
 COPY .env /var/www/12factor/
 
+RUN chown -R www-data:www-data /var/www/
+
 # Expose ports
 EXPOSE 80
 
 # Start Nginx and PHP-FPM
 CMD service nginx start && php-fpm
-RUN chown -R www-data:www-data /var/www/12factor && chmod -R 775 /var/www/12factor/storage
-RUN ls -l .
