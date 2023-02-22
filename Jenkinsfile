@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh 'docker compose down --volumes --remove-orphans'
                 sh 'docker compose up -d'
-                sh 'docker compose run --rm app php artisan test'
+                sh 'docker compose run --rm app php artisan key:generate && php artisan test'
                 sh 'docker compose down'
             }
         }
