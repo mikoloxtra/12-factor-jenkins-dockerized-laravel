@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-      stage('Lint & Test')
+        
         stage('Linting') {
             steps {
                 sh 'composer install --no-interaction --no-progress --prefer-dist'
