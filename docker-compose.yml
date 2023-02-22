@@ -12,7 +12,6 @@ services:
       DB_DATABASE: laravel
       DB_USERNAME: root
       DB_PASSWORD: root
-      APP_KEY: "${APP_KEY}"
     depends_on:
       - db
     ports:
@@ -33,6 +32,8 @@ services:
       - dbdata:/var/lib/mysql
     networks:
       - laravel-network
+    env_file:
+      - .env
 
 networks:
   laravel-network:
