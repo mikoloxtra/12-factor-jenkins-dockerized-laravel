@@ -6,7 +6,6 @@ services:
       context: .
     volumes:
       - .:/var/www/12factor
-    user: "1000:1000"
     environment:
       DB_HOST: db
       DB_PORT: 3306
@@ -23,18 +22,17 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: laravel
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: app
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: Laravel1?
     ports:
       - "4406:3306"
     volumes:
       - dbdata:/var/lib/mysql
     networks:
       - laravel-network
-    env_file:
-      - venv.env
+ #   env_file:
+ #     - venv.env
 
 networks:
   laravel-network:
