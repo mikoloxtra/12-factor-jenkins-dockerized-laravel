@@ -12,6 +12,8 @@ services:
       DB_DATABASE: laravel
       DB_USERNAME: root
       DB_PASSWORD: root
+      APP_KEY: base64:t1eCRhx4om89LfLOrydut49sUgW17QKz6KhOFU9d2wk=
+
     depends_on:
       - db
     ports:
