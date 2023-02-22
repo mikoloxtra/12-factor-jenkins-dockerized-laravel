@@ -1,11 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+
         stage('Linting') {
             steps {
                 sh 'composer install --no-interaction --no-progress --prefer-dist'
