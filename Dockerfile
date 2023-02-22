@@ -19,7 +19,7 @@ RUN apt-get update \
         zip
 
 # Copy app files
-COPY . . && /.env /var/www/12factor/
+COPY . . 
 
 
 # Install Composer
