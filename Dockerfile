@@ -34,7 +34,7 @@ RUN rm /etc/nginx/sites-enabled/default
 COPY /nginx/app.conf /etc/nginx/conf.d/
 
 COPY .env /var/www/12factor/
-RUN chown -R www-data:www-data /var/www/12factor && chmod -R 775 /var/www/12factor/storage
+#RUN chown -R www-data:www-data /var/www/12factor && chmod -R 775 /var/www/12factor/storage
 
 # Expose ports
 EXPOSE 80
