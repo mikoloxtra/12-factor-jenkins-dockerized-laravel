@@ -1,8 +1,5 @@
 FROM php:8.2-fpm
 
-ENV APP_ENV=production
-ENV APP_DEBUG=false
-
 WORKDIR /var/www/12factor
 
 # Install dependencies
@@ -36,7 +33,7 @@ RUN composer install --no-dev
 RUN rm /etc/nginx/sites-enabled/default
 COPY /nginx/app.conf /etc/nginx/conf.d/
 
-COPY .env /var/www/12factor/.env
+COPY .env /var/www/12factor/
 #RUN chown -R www-data:www-data /var/www/12factor
 
 # Expose ports
