@@ -14,7 +14,7 @@ pipeline {
                 COMPOSE_PROJECT_NAME = 'app'
             }
             steps {
-                sh 'docker compose down --volumes --remove-orphans'
+                sh 'docker compose down'
                 sh 'docker compose up -d'
                 sh 'docker compose run --rm app php artisan test'
                 sh 'docker compose down'
