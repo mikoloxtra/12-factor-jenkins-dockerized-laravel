@@ -16,7 +16,7 @@ pipeline {
                         COMPOSE_PROJECT_NAME = 'app'
                     }
                     steps {
-                        sh 'docker stop 12factor-app-1 '
+                        sh 'docker stop 12factor-app-1 app-db-1 app-app-1'
                         sh 'docker compose up -d'
                         sh 'docker compose run --rm app php artisan test'
                         sh 'docker compose down'
