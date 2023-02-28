@@ -9,6 +9,7 @@ pipeline {
                 sh 'php vendor/bin/phpmd app text phpunit.xml'
             }
         }
+        parallel{
         stage('Test') {
             environment {
                 COMPOSE_PROJECT_NAME = 'app'
