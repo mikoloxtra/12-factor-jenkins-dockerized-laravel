@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Test, Build and Deploy'){
             parallel{
-                stages ('Test'){         
+                stage ('Test'){         
                     environment {
                         COMPOSE_PROJECT_NAME = 'app'
                     }
